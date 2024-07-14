@@ -17,7 +17,7 @@ export default function Home() {
     const timestamp = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
 
     try {
-      const response = await fetch('127.0.0.1:3001/news-in-motion/get-snapshots', {
+      const response = await fetch('https://master-node-backend.onrender.com/news-in-motion/get-snapshots', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
