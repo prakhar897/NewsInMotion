@@ -24,7 +24,10 @@ export default function Home() {
         },
         body: JSON.stringify({
           timestamp,
-          siteList: ["https://www.cnn.com", "https://www.cnn.com","https://www.washingtonpost.com","https://www.nytimes.com",]
+          siteList: ["https://www.wsj.com",
+    "https://www.cnn.com",
+    "https://www.washingtonpost.com",
+    "https://www.nytimes.com",]
         }),
       });
       const data = await response.json();
