@@ -12,13 +12,20 @@ export default function Home() {
   const [selectedTime, setSelectedTime] = useState<number>(0);
 
   const fetchImages = async (date: Date, time: number) => {
+    const hours = Math.floor(time / 60);
+    const minutes = time % 60;
+    const timestamp = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+
     try {
-      const response = await fetch('/api/fetchImages', {
+      const response = await fetch('127.0.0.1:3001/news-in-motion/get-snapshots', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ date, time }),
+        body: JSON.stringify({
+          timestamp,
+          siteList: ["https://www.cnn.com", "https://www.cnn.com","https://www.washingtonpost.com","https://www.nytimes.com",]
+        }),
       });
       const data = await response.json();
       setImages(data);
@@ -29,7 +36,9 @@ export default function Home() {
         site: "Placeholder",
         image_base64: "https://via.placeholder.com/1920x1080",
       };
-      setImages([placeholderImage,placeholderImage,placeholderImage,placeholderImage,placeholderImage,placeholderImage]);
+
+      const imagesArray = new Array(20).fill(placeholderImage);
+      setImages(imagesArray);   
     }
     setSelectedTime(time);
   };
